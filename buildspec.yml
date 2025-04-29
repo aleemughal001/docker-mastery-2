@@ -3,7 +3,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - nohup /usr/local/bin/dockerd-entrypoint.sh & 
+      - nohup /usr/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 &
       - timeout 15s bash -c "until docker info; do echo .; sleep 1; done"
       - echo Logging in to Amazon ECR...
       - aws --version
