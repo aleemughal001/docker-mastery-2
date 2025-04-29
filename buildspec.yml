@@ -4,7 +4,7 @@ phases:
   pre_build:
     commands:
       - nohup /usr/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 &
-      - timeout 15s bash -c "until docker info; do echo .; sleep 1; done"
+      - timeout 60s bash -c "until docker info; do echo .; sleep 2; done"
       - echo Logging in to Amazon ECR...
       - aws --version
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 537124940873.dkr.ecr.us-east-1.amazonaws.com
